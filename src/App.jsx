@@ -16,7 +16,9 @@ const router = createBrowserRouter([
     path: '/',
     element: <HomeLayout />,
     loader: LayoutLoader(queryClient),
-    hydrateFallbackElement: <p>Loading ...</p>,
+    hydrateFallbackElement: (
+      <div className='w-8 h-8 mx-auto mt-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin'></div>
+    ),
     errorElement: <Error />,
     children: [
       {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import Select from 'react-select';
 
@@ -68,7 +68,7 @@ const Destinations = () => {
   return (
     <section className=' align-element py-10'>
       <article>
-        <h2 className='text-3xl text-cyan-500 sm:text-4xl md:text-5xl text-center mb-8'>
+        <h2 className='text-3xl text-cyan-500 sm:text-4xl md:text-5xl text-center mb-3'>
           Destinations
         </h2>
         <p className='text-center text-base sm:text-xl mb-3'>
@@ -79,7 +79,7 @@ const Destinations = () => {
         <Select
           options={regions}
           placeholder='Select a Region'
-          className=' text-sm sm:text-lg max-w-40 mx-auto py-4 md:hidden'
+          className=' text-sm max-w-40 sm:max-w-42 mx-auto py-4 md:hidden'
           classNamePrefix='region-select'
           onChange={(e) => getRegion(e.value)}
         />
@@ -136,7 +136,7 @@ const Destinations = () => {
 
         <div className=' flex justify-center'>
           <button
-            className='cursor-pointer text-cyan-600 w-32 md:w-40 text-lg border-2 border-cyan-600 rounded-sm px-4 py-2 transform transition-colors duration-300 hover:bg-cyan-600 hover:text-cyan-50'
+            className='cursor-pointer text-cyan-600 w-30 sm:w-32 md:w-40 text-lg border-2 border-cyan-600 rounded-sm px-3 py-0.5 transform transition-colors duration-300 hover:bg-cyan-600 hover:text-cyan-50'
             onClick={() => addDestinations()}
           >
             {loadCount < countriesByRegion.length ? 'Load more' : 'Show less'}
