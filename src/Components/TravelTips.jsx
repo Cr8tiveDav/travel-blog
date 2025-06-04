@@ -5,7 +5,7 @@ import tipImg4 from '../assets/images/Travel-scam.jpeg';
 
 const TravelTips = () => {
   return (
-    <section className='align-element py-8'>
+    <section id='travelTips' className='align-element py-8'>
       <h2 className='text-3xl text-cyan-500 sm:text-4xl md:text-5xl text-center mb-8'>
         Travel Tips
       </h2>

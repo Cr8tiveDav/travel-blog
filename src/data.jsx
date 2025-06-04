@@ -17,7 +17,8 @@ import hero16 from './assets/images/mountain-view.jpg';
 
 export const links = [
   { id: nanoid(), href: '#home', text: 'home' },
-  { id: nanoid(), href: '#destination', text: 'destination' },
+  { id: nanoid(), href: '#destination', text: 'destinations' },
+  { id: nanoid(), href: '#travelTips', text: 'travel tips' },
   { id: nanoid(), href: '#about', text: 'about' },
 ];
 

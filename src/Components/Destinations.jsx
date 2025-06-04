@@ -37,7 +37,7 @@ const Destinations = () => {
   const countriesByRegion = countries.filter(
     (country) => country.region === selectedRegion
   );
-  console.log(countriesByRegion);
+  // console.log(countriesByRegion);
 
   // const paginate = Array.from({ length: countriesByRegion.length });
   // console.log(paginate);
@@ -66,7 +66,7 @@ const Destinations = () => {
   console.log(loadCount);
 
   return (
-    <section className=' align-element py-10'>
+    <section id='destination' className=' align-element py-10'>
       <article>
         <h2 className='text-3xl text-cyan-500 sm:text-4xl md:text-5xl text-center mb-3'>
           Destinations

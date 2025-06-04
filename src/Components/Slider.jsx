@@ -45,7 +45,7 @@ const Slider = () => {
   }, [currentIndex]);
 
   return (
-    <section className='w-screen h-screen relative overflow-hidden'>
+    <section id='home' className='w-screen h-screen relative overflow-hidden'>
       {/* container for the hero bg */}
       <div
         className={`flex transition-transform duration-1000 ease-in-out  ${
