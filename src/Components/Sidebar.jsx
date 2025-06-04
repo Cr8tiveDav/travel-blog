@@ -13,9 +13,17 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           GoTravel<span className='text-cyan-600'>Wise</span>
         </h2>
         <button className='cursor-pointer' onClick={() => toggleSidebar()}>
-          <FaXmark className='text-3xl' />
+          <FaXmark className='text-3xl text-red-500' />
         </button>
       </header>
+
+      {/* <nav>
+        <ul>
+          <li>
+            <a href=''></a>
+          </li>
+        </ul>
+      </nav> */}
     </aside>
   );
 };

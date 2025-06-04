@@ -10,7 +10,7 @@ const TravelTips = () => {
         Travel Tips
       </h2>
       <div className='grid gap-8 w-max mx-auto md:grid-cols-2'>
-        <article className='w-75 md:w-80 min-h-80 p-4 bg-neutral-50 border-1 border-slate-300 rounded-xl cursor-pointer hover:scale-103 transform transition-all duration-300'>
+        <article className='w-75 md:w-80 min-h-80 p-4 bg-neutral-50 border-1 border-slate-300 rounded-xl cursor-pointer active:scale-103 hover:scale-103 transform transition-all duration-300'>
           <div className='h-52'>
             <img
               src={tipImg1}
@@ -23,7 +23,7 @@ const TravelTips = () => {
           </h3>
         </article>
 
-        <article className='w-75 md:w-80 min-h-80 p-4 bg-neutral-50 border-1 border-slate-300 rounded-xl cursor-pointer hover:scale-103 transform transition-all duration-300'>
+        <article className='w-75 md:w-80 min-h-80 p-4 bg-neutral-50 border-1 border-slate-300 rounded-xl cursor-pointer active:scale-103 hover:scale-103 transform transition-all duration-300'>
           <div className='h-52'>
             <img
               src={tipImg2}
@@ -36,7 +36,7 @@ const TravelTips = () => {
           </h3>
         </article>
 
-        <article className='w-75 md:w-80 min-h-80 p-4 bg-neutral-50 border-1 border-slate-300 rounded-xl cursor-pointer hover:scale-103 transform transition-all duration-300'>
+        <article className='w-75 md:w-80 min-h-80 p-4 bg-neutral-50 border-1 border-slate-300 rounded-xl cursor-pointer active:scale-103 hover:scale-103 transform transition-all duration-300'>
           <div className='h-52'>
             <img
               src={tipImg3}
@@ -49,7 +49,7 @@ const TravelTips = () => {
           </h3>
         </article>
 
-        <article className='w-75 md:w-80 min-h-80 p-4 bg-neutral-50 border-1 border-slate-300 rounded-xl cursor-pointer hover:scale-103 transform transition-all duration-300'>
+        <article className='w-75 md:w-80 min-h-80 p-4 bg-neutral-50 border-1 border-slate-300 rounded-xl cursor-pointer active:scale-103 hover:scale-103 transform transition-all duration-300'>
           <div className='h-52'>
             <img
               src={tipImg4}

@@ -136,7 +136,7 @@ const Destinations = () => {
 
         <div className=' flex justify-center'>
           <button
-            className='cursor-pointer text-cyan-600 w-30 sm:w-32 md:w-40 text-lg border-2 border-cyan-600 rounded-sm px-3 py-0.5 transform transition-colors duration-300 hover:bg-cyan-600 hover:text-cyan-50'
+            className='cursor-pointer text-cyan-600 w-30 sm:w-32 md:w-40 text-lg border-2 border-cyan-600 rounded-sm px-3 py-0.5 transform transition-colors duration-300 active:bg-cyan-600 hover:bg-cyan-600 hover:text-cyan-50'
             onClick={() => addDestinations()}
           >
             {loadCount < countriesByRegion.length ? 'Load more' : 'Show less'}
