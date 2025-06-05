@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import { slides } from '../data';
+import { useOutletContext } from 'react-router';
 
 const Slider = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [transitionEnabled, setTransitionEnabled] = useState(true);
+  const { sentinelRef } = useOutletContext();
+  // console.log(sentinelRef);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => prev + 1);
@@ -80,6 +83,7 @@ const Slider = () => {
           Discover and Explore the World
         </h1>
       </div>
+      <div ref={sentinelRef} className='w-full h-4 absolute bottom-0.5'></div>
     </section>
   );
 };

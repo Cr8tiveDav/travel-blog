@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Navbar from '../Components/Navbar';
 import { Outlet, useLoaderData } from 'react-router';
 import Sidebar from '../Components/Sidebar';
@@ -26,9 +26,8 @@ export const loader = (queryClient) => async () => {
 // Scroll to top functionality
 // Get root element
 const rootElement = document.documentElement;
-console.log(Object.getPrototypeOf(rootElement));
+// console.log(Object.getPrototypeOf(rootElement));
 const scrollToTop = () => {
-  console.log('clicked');
   rootElement.scrollTo({
     top: 0,
   });
@@ -36,6 +35,8 @@ const scrollToTop = () => {
 
 const HomeLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [showScrollBtn, setShowScrollBtn] = useState(false);
+  const sentinelRef = useRef(null);
   const { endPoint } = useLoaderData();
   const { data: countries } = useQuery({
     queryKey: ['countries'],
@@ -48,11 +49,31 @@ const HomeLayout = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  // console.dir(rootElement);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // console.log(entry);
+        // Show when not intersecting
+        setShowScrollBtn(!entry.isIntersecting);
+      },
+      {
+        threshold: 0.05, // 5% of the element is visible
+      }
+    );
+    // console.log(observer);
+    const currentTarget = sentinelRef.current;
+    if (currentTarget) {
+      observer.observe(currentTarget);
+    }
 
-  // useEffect(() => {
-
-  // }, []);
+    return () => {
+      // Clean up the observer when the component unmounts or re-renders
+      if (currentTarget) {
+        observer.unobserve(currentTarget);
+      }
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <>
@@ -61,13 +82,18 @@ const HomeLayout = () => {
 
       <button
         type='button'
-        className='fixed bottom-4 right-4 bg-stone-50 rounded-full p-1 shadow-md shadow-slate-400 cursor-pointer z-10'
+        id='scrollToTopBtn'
+        className={`${
+          showScrollBtn
+            ? 'opacity-80 translate-y-0'
+            : 'opacity-0 translate-y-30'
+        } fixed bottom-8 right-6 bg-stone-50 rounded-full p-2 shadow-md shadow-slate-400 cursor-pointer z-10 transform transition-all duration-500 ease-in-out`}
         onClick={() => scrollToTop()}
       >
-        <IoIosArrowUp className=' text-2xl text-slate-900/50' />
+        <IoIosArrowUp className=' text-2xl text-slate-500/70' />
       </button>
 
-      <Outlet context={{ toggleSidebar, countries }} />
+      <Outlet context={{ toggleSidebar, countries, sentinelRef }} />
     </>
   );
 };

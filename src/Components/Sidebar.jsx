@@ -31,10 +31,10 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
     >
       <header className='flex place-content-between '>
         <h2 className='text-2xl text-slate-900  font-bold'>
-          GoTravel<span className='text-cyan-900'>Wise</span>
+          GoTravel<span className='text-cyan-700'>Wise</span>
         </h2>
         <button className='cursor-pointer' onClick={() => toggleSidebar()}>
-          <FaXmark className='text-3xl text-red-500' />
+          <FaXmark className='text-3xl text-red-400' />
         </button>
       </header>
 
