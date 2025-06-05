@@ -83,7 +83,7 @@ const Slider = () => {
           Discover and Explore the World
         </h1>
       </div>
-      <div ref={sentinelRef} className='w-full h-12 absolute bottom-0.5'></div>
+      <div ref={sentinelRef} className='w-full h-16 absolute bottom-0.5'></div>
     </section>
   );
 };
