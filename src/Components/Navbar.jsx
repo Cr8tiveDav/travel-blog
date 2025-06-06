@@ -1,32 +1,10 @@
-import { useRef, useState } from 'react';
 import { links } from '../data';
 
 const Navbar = () => {
-  const [navbarHeight, setNavbarHeight] = useState(0);
-  const navbarRef = useRef(null);
-
   return (
-    // <nav className='bg-cyan-200 hidden md:block'>
-    //   <div className='align-element'>
-    //     <h2 className='text-2xl font-bold py-4'>
-    //       GoTravel<span className='text-cyan-600'>Wise</span>
-    //     </h2>
-    //     <div>
-    //       {links.map((link) => {
-    //         const { id, href, text } = link;
-    //         return (
-    //           <a href={href} key={id}>
-    //             {text}
-    //           </a>
-    //         );
-    //       })}
-    //     </div>
-    //   </div>
-    // </nav>
-
-    <nav className='hidden md:block'>
+    <nav className='hidden md:block fixed bg-stone-50 z-10 top-0 left-0 right-0 border-b-1 border-b-slate-300'>
       <div className='align-element grid grid-cols-[auto_1fr] place-items-center'>
-        <h2 className='text-2xl font-bold py-4'>
+        <h2 className='text-2xl text-gray-800 font-bold py-4'>
           GoTravel<span className='text-cyan-600'>Wise</span>
         </h2>
         <ul className='flex'>
@@ -36,8 +14,7 @@ const Navbar = () => {
               <li key={id}>
                 <a
                   href={href}
-                  // onClick={() => toggleSidebar()}
-                  className='text-lg capitalize text-slate-800 active:bg-slate-200 hover:bg-slate-200 p-2 rounded-lg transform transition-colors duration-300'
+                  className='text-lg capitalize text-slate-800 hover:text-cyan-600 p-2 rounded-lg transform transition-colors duration-300'
                 >
                   {text}
                 </a>

@@ -1,26 +1,26 @@
 import { useEffect, useRef, useState } from 'react';
 import Navbar from '../Components/Navbar';
-import { Outlet, useLoaderData } from 'react-router';
+import { Outlet } from 'react-router';
 import Sidebar from '../Components/Sidebar';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { IoIosArrowUp } from 'react-icons/io';
 
-const baseUrl = 'https://restcountries.com/v3.1';
+const url = 'https://restcountries.com/v3.1/all';
 
-const fetchCountries = async (endpoint) => {
+const fetchCountries = async () => {
   console.log('fetching countries...');
-  const { data } = await axios.get(`${baseUrl}${endpoint}`);
+  const fields = ['name', 'region', 'flags', 'cca3'];
+  const { data } = await axios.get(`${url}?fields=${fields}`);
   return data;
 };
 
 export const loader = (queryClient) => async () => {
-  const endPoint = '/all';
   await queryClient.ensureQueryData({
     queryKey: ['countries'],
-    queryFn: () => fetchCountries(endPoint),
+    queryFn: () => fetchCountries(),
   });
-  return { endPoint };
+  return null;
 };
 
 // Scroll to top functionality
@@ -37,10 +37,9 @@ const HomeLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showScrollBtn, setShowScrollBtn] = useState(false);
   const sentinelRef = useRef(null);
-  const { endPoint } = useLoaderData();
   const { data: countries } = useQuery({
     queryKey: ['countries'],
-    queryFn: () => fetchCountries(endPoint),
+    queryFn: () => fetchCountries(),
   });
   console.log(countries);
   console.count('HomeLayout');
@@ -50,14 +49,19 @@ const HomeLayout = () => {
   };
 
   useEffect(() => {
+    const isNotMobile = window.matchMedia('(min-width: 768px )').matches;
+    console.log(isNotMobile);
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // console.log(entry);
-        // Show when not intersecting
-        setShowScrollBtn(!entry.isIntersecting);
+        console.log(entry);
+        // Show when target bounding-client-rect top is < 0
+        const isAboveViewport = entry.boundingClientRect.top < 0;
+        console.log(isAboveViewport);
+        setShowScrollBtn(isAboveViewport);
       },
       {
-        threshold: 0.05, // 5% of the element is visible
+        threshold: 0, // Fires when any part of the target leaves the viewport
       }
     );
     // console.log(observer);

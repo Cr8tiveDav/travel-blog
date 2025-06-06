@@ -48,7 +48,7 @@ const Slider = () => {
   }, [currentIndex]);
 
   return (
-    <section id='home' className='w-screen h-screen relative overflow-hidden'>
+    <section id='home' className='w-screen relative overflow-hidden'>
       {/* container for the hero bg */}
       <div
         className={`flex transition-transform duration-1000 ease-in-out  ${
@@ -66,7 +66,7 @@ const Slider = () => {
             // Each container takes the viewport of the screen and does not shrink
             <div
               key={index}
-              className=' relative w-screen h-screen flex-shrink-0'
+              className=' relative w-screen h-screen md:h-[calc(100vh-4rem)]  flex-shrink-0 overflow-hidden'
             >
               <img
                 src={href}
@@ -83,7 +83,10 @@ const Slider = () => {
           Discover and Explore the World
         </h1>
       </div>
-      <div ref={sentinelRef} className='w-full h-16 absolute bottom-0.5'></div>
+      <div
+        ref={sentinelRef}
+        className='w-full md:h-16 absolute bottom-0 bg-red-200'
+      ></div>
     </section>
   );
 };

@@ -19,7 +19,7 @@ const Destinations = () => {
 
   const regions = [
     ...new Set(
-      countries.map((country) => {
+      countries?.map((country) => {
         return country.region;
       })
     ),
@@ -34,24 +34,9 @@ const Destinations = () => {
   };
 
   // Filter countries of the same region
-  const countriesByRegion = countries.filter(
+  const countriesByRegion = countries?.filter(
     (country) => country.region === selectedRegion
   );
-  // console.log(countriesByRegion);
-
-  // const paginate = Array.from({ length: countriesByRegion.length });
-  // console.log(paginate);
-
-  // const itemsPerPage = 8;
-  // const pages = Math.ceil(countriesByRegion.length / itemsPerPage);
-  // console.log(pages);
-
-  // const newItems = Array.from({ length: pages }, (_, index) => {
-  //   const start = index * itemsPerPage;
-  //   const tempItems = countriesByRegion.slice(start, start + itemsPerPage);
-  //   return tempItems;
-  // });
-  // console.log(newItems);
 
   const addDestinations = () => {
     const numOfDestinations = countriesByRegion.length;
@@ -67,7 +52,7 @@ const Destinations = () => {
   return (
     <section id='destination' className=' align-element py-10'>
       <article>
-        <h2 className='text-3xl text-cyan-500 sm:text-4xl md:text-5xl text-center mb-3'>
+        <h2 className='text-3xl text-cyan-600 sm:text-4xl md:text-5xl text-center mb-3'>
           Destinations
         </h2>
         <p className='text-center text-base sm:text-xl mb-3'>
@@ -83,6 +68,7 @@ const Destinations = () => {
           onChange={(e) => getRegion(e.value)}
         />
 
+        {/* Select menu for tablet, laptop and desktop */}
         <div className=' hidden md:block w-max mx-auto  border-b-1 border-b-neutral-300'>
           {regions.map((region, index) => {
             return (
@@ -105,7 +91,7 @@ const Destinations = () => {
         </div>
 
         <div className='w-max mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 py-8'>
-          {countriesByRegion.map((country, index) => {
+          {countriesByRegion?.map((country, index) => {
             const {
               cca3,
               name: { common },
@@ -138,7 +124,7 @@ const Destinations = () => {
             className='cursor-pointer text-cyan-600 w-30 sm:w-32 md:w-40 text-lg border-2 border-cyan-600 rounded-sm px-3 py-0.5 transform transition-colors duration-300 active:bg-cyan-600 hover:bg-cyan-600 active:text-cyan-50 hover:text-cyan-50'
             onClick={() => addDestinations()}
           >
-            {loadCount < countriesByRegion.length ? 'Load more' : 'Show less'}
+            {loadCount < countriesByRegion?.length ? 'Load more' : 'Show less'}
           </button>
         </div>
       </article>

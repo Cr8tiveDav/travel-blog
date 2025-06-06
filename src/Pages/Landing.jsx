@@ -10,7 +10,7 @@ const Landing = () => {
   console.count('Landing');
 
   return (
-    <main className='text-3xl relative'>
+    <main className='text-3xl relative md:pt-16'>
       {/* <button onClick={() => nextSlide()}>slide</button> */}
 
       {/* Hero section */}
