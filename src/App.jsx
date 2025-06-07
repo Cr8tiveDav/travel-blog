@@ -1,6 +1,13 @@
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { HomeLayout, Landing, Error, SinglePageError, About } from './Pages';
+import {
+  HomeLayout,
+  Landing,
+  TravelBlog,
+  Error,
+  SinglePageError,
+  About,
+} from './Pages';
 import { loader as LayoutLoader } from './Pages/HomeLayout';
 
 const queryClient = new QueryClient({
@@ -24,6 +31,11 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Landing />,
+        errorElement: <SinglePageError />,
+      },
+      {
+        path: 'blog',
+        element: <TravelBlog />,
         errorElement: <SinglePageError />,
       },
       {

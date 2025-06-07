@@ -1,4 +1,5 @@
 import { links } from '../data';
+import { Link } from 'react-router';
 
 const Navbar = () => {
   return (
@@ -12,12 +13,18 @@ const Navbar = () => {
             const { id, href, text } = link;
             return (
               <li key={id}>
-                <a
+                {/* <a
                   href={href}
+                  className='text-lg capitalize text-slate-800 hover:text-cyan-600 p-2 rounded-lg transform transition-colors duration-300'
+                  >
+                  {text}
+                </a> */}
+                <Link
+                  to={href}
                   className='text-lg capitalize text-slate-800 hover:text-cyan-600 p-2 rounded-lg transform transition-colors duration-300'
                 >
                   {text}
-                </a>
+                </Link>
               </li>
             );
           })}

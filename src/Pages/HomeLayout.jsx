@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Navbar from '../Components/Navbar';
-import { Outlet } from 'react-router';
+import { Outlet, useLocation } from 'react-router';
 import Sidebar from '../Components/Sidebar';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
@@ -37,6 +37,7 @@ const HomeLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showScrollBtn, setShowScrollBtn] = useState(false);
   const sentinelRef = useRef(null);
+  const location = useLocation();
   const { data: countries } = useQuery({
     queryKey: ['countries'],
     queryFn: () => fetchCountries(),
@@ -47,6 +48,18 @@ const HomeLayout = () => {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
+  console.log(location);
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.slice(1));
+      console.dir(element);
+
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
 
   useEffect(() => {
     const isNotMobile = window.matchMedia('(min-width: 768px )').matches;

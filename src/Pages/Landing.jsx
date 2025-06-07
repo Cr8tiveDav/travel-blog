@@ -1,4 +1,4 @@
-import { useOutletContext } from 'react-router';
+import { useLocation, useOutletContext } from 'react-router';
 import { FaBars } from 'react-icons/fa';
 import Destinations from '../Components/Destinations';
 import Slider from '../Components/Slider';
