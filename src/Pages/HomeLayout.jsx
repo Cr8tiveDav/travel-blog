@@ -51,10 +51,11 @@ const HomeLayout = () => {
   useEffect(() => {
     const isNotMobile = window.matchMedia('(min-width: 768px )').matches;
     console.log(isNotMobile);
+    const marginTop = isNotMobile ? '-64px' : '0px'; // Top margin for the root margin
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        console.log(entry);
+        // console.log(entry);
         // Show when target bounding-client-rect top is < 0
         const isAboveViewport = entry.boundingClientRect.top < 0;
         console.log(isAboveViewport);
@@ -62,6 +63,7 @@ const HomeLayout = () => {
       },
       {
         threshold: 0, // Fires when any part of the target leaves the viewport
+        rootMargin: `${marginTop} 0px 0px 0px`, // Dynamically set the root margin depending on the device screen
       }
     );
     // console.log(observer);

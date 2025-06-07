@@ -52,7 +52,7 @@ const Destinations = () => {
   return (
     <section id='destination' className=' align-element py-10'>
       <article>
-        <h2 className='text-3xl text-cyan-600 sm:text-4xl md:text-5xl text-center mb-3'>
+        <h2 className='text-2xl sm:text-3xl font-semibold text-cyan-600 text-center mb-3'>
           Destinations
         </h2>
         <p className='text-center text-base sm:text-xl mb-3'>
