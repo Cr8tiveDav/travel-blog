@@ -1,7 +1,3 @@
-import tipImg1 from '../assets/images/World-travel.jpeg';
-import tipImg2 from '../assets/images/Travel-bag.jpeg';
-import tipImg3 from '../assets/images/Travel-app.jpeg';
-import tipImg4 from '../assets/images/Travel-scam.jpeg';
 import { Link } from 'react-router-dom';
 import { useFetchBlogs } from '../CustomHooks/useFetchBlogs';
 
