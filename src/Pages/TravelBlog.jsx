@@ -1,7 +1,7 @@
 const TravelBlog = () => {
   return (
     <>
-      <section>Travel blog section</section>
+      <section>coming soon!</section>
     </>
   );
 };
