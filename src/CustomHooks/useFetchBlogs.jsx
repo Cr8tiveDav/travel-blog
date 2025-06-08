@@ -1,5 +1,5 @@
 import { createClient } from 'contentful';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const client = createClient({
   space: import.meta.env.VITE_SPACE_ID,
@@ -7,21 +7,33 @@ const client = createClient({
   accessToken: import.meta.env.VITE_API_KEY,
 });
 
-console.log(import.meta.env.VITE_API_KEY);
-
-const useFetchBlogs = () => {
+export const useFetchBlogs = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [blogs, setBlogs] = useState([]);
 
   const getData = async () => {
     try {
       const resp = await client.getEntries({
-        content_type: 'Travel Blog Post',
+        content_type: 'travelBlogPost',
       });
+
+      const data = resp.items.map((blog) => {
+        const { title, images } = blog.fields;
+        const id = blog.sys.id;
+        const img = images[0]?.fields?.file?.url;
+        return { title, id, img };
+      });
+      setIsLoading(false);
+      setBlogs(data);
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   };
 
-  return <div>useFetchBlogs</div>;
+  useEffect(() => {
+    getData();
+  }, []);
+
+  return { isLoading, blogs };
 };
-export default useFetchBlogs;
