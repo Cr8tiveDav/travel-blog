@@ -19,7 +19,7 @@ const TravelTips = () => {
           return (
             <Link
               key={id}
-              to='/blog'
+              to={`/blog/${id}`}
               className='w-75 sm:w-70 md:w-80 min-h-70 p-4 bg-neutral-50 border-1 border-slate-300 rounded-xl cursor-pointer active:scale-102 active:bg-cyan-50 hover:scale-102 hover:bg-slate-100 transform transition-all duration-300'
             >
               <div className='h-52'>

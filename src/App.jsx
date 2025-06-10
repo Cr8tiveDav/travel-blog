@@ -8,7 +8,8 @@ import {
   SinglePageError,
   About,
 } from './Pages';
-import { loader as LayoutLoader } from './Pages/HomeLayout';
+import { loader as layoutLoader } from './Pages/HomeLayout';
+import { loader as blogLoader } from './Pages/TravelBlog';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <HomeLayout />,
-    loader: LayoutLoader(queryClient),
+    loader: layoutLoader(queryClient),
     hydrateFallbackElement: (
       <div className='w-8 h-8 mx-auto mt-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin'></div>
     ),
@@ -34,8 +35,9 @@ const router = createBrowserRouter([
         errorElement: <SinglePageError />,
       },
       {
-        path: 'blog',
+        path: 'blog/:id',
         element: <TravelBlog />,
+        loader: blogLoader,
         errorElement: <SinglePageError />,
       },
       {
