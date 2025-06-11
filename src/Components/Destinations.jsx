@@ -76,8 +76,8 @@ const Destinations = () => {
                 key={index}
                 className={`cursor-pointer text-lg px-4 pb-2 border-b-2 transform transition-all duration-300 ${
                   index === activeButton
-                    ? 'border-b-cyan-600'
-                    : 'border-transparent'
+                    ? 'border-b-cyan-600 text-cyan-600'
+                    : 'border-transparent  hover:border-b-cyan-600/50'
                 }  `}
                 onClick={() => {
                   setSelectedRegion(region.value);
