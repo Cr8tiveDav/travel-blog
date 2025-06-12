@@ -2,6 +2,7 @@ import { useLoaderData, useOutletContext } from 'react-router';
 import { createClient } from 'contentful';
 import { useEffect, useState } from 'react';
 import { FaBars } from 'react-icons/fa';
+import { nanoid } from 'nanoid';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
@@ -29,13 +30,36 @@ const TravelBlog = () => {
       const newEntry = [entry];
       console.log(newEntry);
       const post = newEntry.map((post) => {
-        const { title, author, authorsImage, publishDate, images } =
-          post.fields;
+        const {
+          title,
+          author,
+          authorsImage,
+          publishDate,
+          images,
+          introduction,
+          mainSection,
+          conclusion: conclusionData,
+        } = post.fields;
         const id = post.sys.id;
         const img = images[0]?.fields?.file?.url;
         const authorsImg = authorsImage?.fields?.file?.url;
-        return { id, title, author, authorsImg, publishDate, img };
+        const intro = introduction?.content;
+        const conclusion = conclusionData?.content;
+        // const contentArr = content?.content;
+        // console.log(contentArr);
+        return {
+          id,
+          title,
+          author,
+          authorsImg,
+          publishDate,
+          img,
+          intro,
+          mainSection,
+          conclusion,
+        };
       });
+      // console.log(post);
       setPost(post);
     } catch (error) {
       console.log(error);
@@ -45,6 +69,8 @@ const TravelBlog = () => {
   useEffect(() => {
     fetchPostById(postId);
   }, [postId]);
+
+  console.log(post);
   return (
     <>
       <section className='mx-4 pt-8 md:mt-16 m-auto'>
@@ -65,8 +91,13 @@ const TravelBlog = () => {
             authorsImg,
             publishDate,
             img: heroImg,
+            intro,
+            mainSection,
+            conclusion,
           } = item;
           console.log(publishDate);
+
+          console.log(mainSection);
 
           const date = dayjs(publishDate).fromNow();
           console.log(date);
@@ -86,6 +117,7 @@ const TravelBlog = () => {
                     {author}
                   </span>
                 </address>
+                {/* MetaData — Information about the article */}
                 <div className='mb-4'>
                   <time
                     dateTime={publishDate}
@@ -97,13 +129,76 @@ const TravelBlog = () => {
               </header>
 
               <main>
-                <figure className='h-55'>
+                <figure className='h-65 mb-6'>
                   <img
                     src={heroImg}
                     alt={title}
                     className='w-full h-full object-cover'
                   />
                 </figure>
+
+                {/* Introduction */}
+                {intro?.map((item) => {
+                  const introduction = item.content;
+                  return (
+                    <div key={nanoid()} className=' mt-2'>
+                      {introduction.map((item) => {
+                        return (
+                          <p key={nanoid()} className='text-gray-700'>
+                            {item.value}
+                          </p>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
+
+                {/* Body */}
+                {mainSection?.map((item) => {
+                  // console.log(item);
+                  const { appTitle, description, bonusTip } = item.fields;
+                  // console.log(description);
+                  const { content } = description;
+                  // console.log(content);
+                  {
+                    const valueArr = content.map((item) => {
+                      const contentText = item.content;
+                      console.log(contentText);
+                      const value = contentText.map((item) => {
+                        return item.value;
+                      });
+                      console.log(value);
+                      return value;
+                    });
+                    console.log(valueArr);
+                  }
+                  return (
+                    <div key={nanoid()}>
+                      <h1 className='text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-6 text-gray-800'>
+                        {appTitle}
+                      </h1>
+                      <p>Explanation</p>
+                      <p className='text-gray-700'>{bonusTip}</p>
+                    </div>
+                  );
+                })}
+
+                {/* Conclusion */}
+                {conclusion?.map((item) => {
+                  console.log(item);
+                  const conclusion = item.content;
+                  return (
+                    <div key={nanoid()} className=''>
+                      {conclusion.map((item) => {
+                        return (
+                          <p key={nanoid()} className='text-gray-700 mt-6'>
+                            {item.value}
+                          </p>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
               </main>
             </article>
           );

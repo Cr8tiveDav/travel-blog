@@ -42,7 +42,7 @@ const HomeLayout = () => {
     queryKey: ['countries'],
     queryFn: () => fetchCountries(),
   });
-  console.log(countries);
+  // console.log(countries);
   console.count('HomeLayout');
 
   const toggleSidebar = () => {

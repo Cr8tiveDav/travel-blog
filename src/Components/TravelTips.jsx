@@ -4,7 +4,7 @@ import { useFetchBlogs } from '../CustomHooks/useFetchBlogs';
 const TravelTips = () => {
   const { isLoading, blogs } = useFetchBlogs();
   console.log(isLoading);
-  console.log(blogs);
+  // console.log(blogs);
   return (
     <section id='travelTips' className='align-element py-8'>
       <h2 className='text-2xl sm:text-3xl font-semibold text-cyan-600 text-center mb-8'>
