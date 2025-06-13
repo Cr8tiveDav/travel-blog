@@ -1,4 +1,5 @@
 import { useLoaderData, useOutletContext } from 'react-router';
+import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
 import { createClient } from 'contentful';
 import { useEffect, useState } from 'react';
 import { FaBars } from 'react-icons/fa';
@@ -20,12 +21,38 @@ const client = createClient({
 
 const TravelBlog = () => {
   const [post, setPost] = useState([]);
+  const [readTime, setReadTime] = useState(0);
   const { id: postId } = useLoaderData();
   const { toggleSidebar } = useOutletContext();
 
   const fetchPostById = async (postId) => {
     try {
       const entry = await client.getEntry(postId);
+      console.log(entry);
+
+      const introText = documentToPlainTextString(entry.fields.introduction);
+      const conclusionText = documentToPlainTextString(entry.fields.conclusion);
+      const mainSectionText = entry.fields?.mainSection
+        ?.map((item) => {
+          const titleAndBonusTip = `${item.fields.appTitle} ${
+            item.fields?.bonusTip || ''
+          }`;
+          const documentText = documentToPlainTextString(
+            item.fields.description
+          );
+          const subSectionText = `${titleAndBonusTip} ${documentText}`;
+          return subSectionText;
+        })
+        .join(' ');
+
+      const totalWords =
+        `${introText} ${mainSectionText} ${conclusionText}`.split(/\s+/).length;
+      const wordsPerMinute = 200;
+      // TODO: calc the image view time
+      // const imageViewTime = 12; // seconds per image
+      // let numberOfImages = 0;
+      // Calc reading time
+      setReadTime(Math.ceil(totalWords / wordsPerMinute));
 
       const newEntry = [entry];
       console.log(newEntry);
@@ -45,8 +72,6 @@ const TravelBlog = () => {
         const authorsImg = authorsImage?.fields?.file?.url;
         const intro = introduction?.content;
         const conclusion = conclusionData?.content;
-        // const contentArr = content?.content;
-        // console.log(contentArr);
         return {
           id,
           title,
@@ -59,7 +84,6 @@ const TravelBlog = () => {
           conclusion,
         };
       });
-      // console.log(post);
       setPost(post);
     } catch (error) {
       console.log(error);
@@ -70,7 +94,6 @@ const TravelBlog = () => {
     fetchPostById(postId);
   }, [postId]);
 
-  console.log(post);
   return (
     <>
       <section className='mx-4 pt-8 md:mt-16 m-auto'>
@@ -97,7 +120,14 @@ const TravelBlog = () => {
           } = item;
           console.log(publishDate);
 
-          console.log(mainSection);
+          const contents = mainSection?.map((item) => {
+            const { appTitle, description, bonusTip } = item.fields;
+            const paragraphs = description.content.map((item) => {
+              const values = item.content.map((item) => item.value).join('');
+              return values;
+            });
+            return { appTitle, paragraphs, bonusTip };
+          });
 
           const date = dayjs(publishDate).fromNow();
           console.log(date);
@@ -123,13 +153,14 @@ const TravelBlog = () => {
                     dateTime={publishDate}
                     className='text-xs sm:text-sm text-gray-500'
                   >
-                    {date} <span className='text-gray-300'>•</span> reading time
+                    {date} <span className='text-gray-300'>•</span> {readTime}{' '}
+                    min read
                   </time>
                 </div>
               </header>
 
               <main>
-                <figure className='h-65 mb-6'>
+                <figure className='h-65 mb-8'>
                   <img
                     src={heroImg}
                     alt={title}
@@ -144,7 +175,10 @@ const TravelBlog = () => {
                     <div key={nanoid()} className=' mt-2'>
                       {introduction.map((item) => {
                         return (
-                          <p key={nanoid()} className='text-gray-700'>
+                          <p
+                            key={nanoid()}
+                            className='text-gray-700 leading-relaxed'
+                          >
                             {item.value}
                           </p>
                         );
@@ -153,45 +187,40 @@ const TravelBlog = () => {
                   );
                 })}
 
-                {/* Body */}
-                {mainSection?.map((item) => {
-                  // console.log(item);
-                  const { appTitle, description, bonusTip } = item.fields;
-                  // console.log(description);
-                  const { content } = description;
-                  // console.log(content);
-                  {
-                    const valueArr = content.map((item) => {
-                      const contentText = item.content;
-                      console.log(contentText);
-                      const value = contentText.map((item) => {
-                        return item.value;
-                      });
-                      console.log(value);
-                      return value;
-                    });
-                    console.log(valueArr);
-                  }
+                {/* content */}
+                {contents?.map((item) => {
+                  const { appTitle, paragraphs, bonusTip } = item;
                   return (
                     <div key={nanoid()}>
                       <h1 className='text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-6 text-gray-800'>
                         {appTitle}
                       </h1>
-                      <p>Explanation</p>
-                      <p className='text-gray-700'>{bonusTip}</p>
+                      {paragraphs.map((paragraph) => (
+                        <p
+                          key={nanoid()}
+                          className='text-gray-700 mt-2 leading-relaxed'
+                        >
+                          {paragraph}
+                        </p>
+                      ))}
+                      <p className='text-gray-700 mt-2 leading-relaxed'>
+                        {bonusTip}
+                      </p>
                     </div>
                   );
                 })}
 
                 {/* Conclusion */}
                 {conclusion?.map((item) => {
-                  console.log(item);
                   const conclusion = item.content;
                   return (
                     <div key={nanoid()} className=''>
                       {conclusion.map((item) => {
                         return (
-                          <p key={nanoid()} className='text-gray-700 mt-6'>
+                          <p
+                            key={nanoid()}
+                            className='text-gray-700 mt-6 leading-relaxed'
+                          >
                             {item.value}
                           </p>
                         );
