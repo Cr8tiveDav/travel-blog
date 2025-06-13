@@ -98,14 +98,16 @@ const TravelBlog = () => {
     <>
       <section className='mx-4 pt-8 md:mt-16 m-auto'>
         {/* Menu bar for mobile */}
-        <button
-          className='text-cyan-500 text-3xl cursor-pointer md:hidden fixed top-4 left-4'
-          onClick={() => {
-            toggleSidebar();
-          }}
-        >
-          <FaBars />
-        </button>
+        <div className='fixed top-0 left-0 right-0 px-4 py-3 bg-stone-50 shadow-sm'>
+          <button
+            className='text-cyan-500 text-3xl align-middle cursor-pointer md:hidden'
+            onClick={() => {
+              toggleSidebar();
+            }}
+          >
+            <FaBars />
+          </button>
+        </div>
         {post.map((item) => {
           const {
             id,
@@ -132,7 +134,7 @@ const TravelBlog = () => {
           const date = dayjs(publishDate).fromNow();
           console.log(date);
           return (
-            <article key={id} className='py-6'>
+            <article key={id} className='py-10'>
               <header>
                 <h1 className='text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-4'>
                   {title}
@@ -190,6 +192,7 @@ const TravelBlog = () => {
                 {/* content */}
                 {contents?.map((item) => {
                   const { appTitle, paragraphs, bonusTip } = item;
+                  console.log(bonusTip);
                   return (
                     <div key={nanoid()}>
                       <h1 className='text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-6 text-gray-800'>
@@ -203,9 +206,11 @@ const TravelBlog = () => {
                           {paragraph}
                         </p>
                       ))}
-                      <p className='text-gray-700 mt-2 leading-relaxed'>
-                        {bonusTip}
-                      </p>
+                      {bonusTip && (
+                        <p className='text-gray-700 mt-2 leading-relaxed'>
+                          {bonusTip}
+                        </p>
+                      )}
                     </div>
                   );
                 })}
