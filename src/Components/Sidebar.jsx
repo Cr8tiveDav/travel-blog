@@ -25,7 +25,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
 
   return (
     <aside
-      className={`md:hidden bg-stone-100 w-80 p-4 z-10 h-screen fixed  duration-300 ease-in-out ${
+      className={`md:hidden bg-stone-50 w-80 p-4 z-20 h-screen fixed  duration-300 ease-in-out ${
         isSidebarOpen ? 'translate-x-[0]' : 'translate-x-[-100%] '
       }`}
     >

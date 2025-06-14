@@ -1,8 +1,23 @@
 @import 'tailwindcss';
 
+/* Custom component classes */
 @layer components {
+  /* Utility Class for alignment */
   .align-element {
     @apply mx-auto max-w-7xl px-8;
+  }
+  .animate-fade {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+}
+
+/* Keyframe */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 

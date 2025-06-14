@@ -112,6 +112,14 @@ const HomeLayout = () => {
         <IoIosArrowUp className=' text-2xl text-slate-500/70' />
       </button>
 
+      {/* Overlay */}
+      {isSidebarOpen && (
+        <div
+          onClick={() => setIsSidebarOpen(false)}
+          className='fixed inset-0 bg-slate-900/50 z-10 animate-fade'
+        />
+      )}
+
       <Outlet context={{ toggleSidebar, countries, sentinelRef }} />
     </>
   );
