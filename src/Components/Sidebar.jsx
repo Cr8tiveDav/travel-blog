@@ -25,7 +25,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
 
   return (
     <aside
-      className={`md:hidden bg-stone-50 w-[80%] p-4 z-20 h-screen fixed  duration-300 ease-in-out ${
+      className={`md:hidden bg-stone-50 w-[80%] sm:w-[50%] p-4 z-20 h-screen fixed  duration-300 ease-in-out ${
         isSidebarOpen ? 'translate-x-[0]' : 'translate-x-[-100%] '
       }`}
     >
@@ -34,7 +34,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           GoTravel<span className='text-cyan-700'>Wise</span>
         </h2>
         <button className='cursor-pointer' onClick={() => toggleSidebar()}>
-          <FaXmark className='text-3xl text-red-400' />
+          <FaXmark className='text-2xl text-gray-700' />
         </button>
       </header>
 
@@ -49,10 +49,16 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
                   onClick={() => toggleSidebar()}
                   className='text-lg capitalize text-slate-800 flex gap-2 place-items-center active:bg-slate-200 hover:bg-slate-200 p-2 rounded-lg transform transition-colors duration-300 '
                 >
-                  {text === 'home' && <FaHome />}
-                  {text === 'destinations' && <FaGlobe />}
-                  {text === 'travel tips' && <MdTipsAndUpdates />}
-                  {text === 'about' && <FaInfoCircle />}
+                  {text === 'home' && <FaHome className='text-cyan-700' />}
+                  {text === 'destinations' && (
+                    <FaGlobe className='text-cyan-700' />
+                  )}
+                  {text === 'travel tips' && (
+                    <MdTipsAndUpdates className='text-cyan-700' />
+                  )}
+                  {text === 'about' && (
+                    <FaInfoCircle className='text-cyan-700' />
+                  )}
                   {text}
                 </a>
               </li>
