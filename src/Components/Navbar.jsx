@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 const Navbar = () => {
   return (
     <nav className='hidden md:block fixed bg-stone-50 z-10 top-0 left-0 right-0 border-b-1 border-b-slate-300'>
-      <div className='align-element grid grid-cols-[auto_1fr] place-items-center'>
+      <div className='align-element max-w-5xl grid grid-cols-[auto_1fr] place-items-center'>
         <h2 className='text-2xl text-gray-800 font-bold py-4'>
           GoTravel<span className='text-cyan-600'>Wise</span>
         </h2>

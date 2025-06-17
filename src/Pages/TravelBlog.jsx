@@ -47,7 +47,7 @@ const TravelBlog = () => {
 
       const totalWords =
         `${introText} ${mainSectionText} ${conclusionText}`.split(/\s+/).length;
-      const wordsPerMinute = 200;
+      const wordsPerMinute = 180;
       // TODO: calc the image view time
       // const imageViewTime = 12; // seconds per image
       // let numberOfImages = 0;
@@ -96,7 +96,7 @@ const TravelBlog = () => {
 
   return (
     <>
-      <section className='mx-4 pt-8 md:mt-16 m-auto'>
+      <section className='max-w-3xl md:mx-auto mx-4 pt-8 md:mt-16 m-auto'>
         {/* Menu bar for mobile */}
         <div className='fixed top-0 left-0 right-0 px-4 py-3 bg-stone-50 shadow-sm'>
           <button
@@ -162,7 +162,7 @@ const TravelBlog = () => {
               </header>
 
               <main>
-                <figure className='h-65 mb-8'>
+                <figure className='h-65 md:h-90 mb-8'>
                   <img
                     src={heroImg}
                     alt={title}
